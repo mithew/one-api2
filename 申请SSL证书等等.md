@@ -1,5 +1,3 @@
-❙ 完整步骤（每个命令都可以直接复制执行）：
-
 1. 安装必要工具：
 ```
 apt update
@@ -64,6 +62,11 @@ docker run --name new-api -d --restart always \
 (crontab -l 2>/dev/null; echo "0 2 1 * * certbot renew --quiet") | crontab -
 ```
 
+检查自动续期是否设置成功：
+```
+crontab -l
+```
+
 8. 检查服务状态：
 ```
 docker ps
@@ -89,3 +92,22 @@ ufw allow 443
 ```
 
 这样就完成了全部配置，可以通过 https://api.域名.win 安全访问你的服务了。
+
+====================
+====================
+
+其他命令：
+
+1. 停止并删除当前Docker容器：
+```
+docker stop new-api
+docker rm new-api
+```
+```
+docker restart new-api
+```
+
+2. 五天自动重启
+```
+(crontab -l 2>/dev/null; echo "30 05 */5 * * /sbin/reboot") | crontab -
+```
