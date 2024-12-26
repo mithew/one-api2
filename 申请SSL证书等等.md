@@ -59,7 +59,7 @@ docker run --name new-api -d --restart always \
 
 7. 设置证书自动续期：
 ```
-(crontab -l 2>/dev/null; echo "0 2 1 * * certbot renew --quiet") | crontab -
+(crontab -l 2>/dev/null; echo "0 3 10,25 * * certbot renew --quiet") | crontab -
 ```
 
 检查自动续期是否设置成功：
@@ -110,4 +110,9 @@ docker restart new-api
 2. 五天自动重启
 ```
 (crontab -l 2>/dev/null; echo "30 05 */5 * * /sbin/reboot") | crontab -
+```
+
+3. 每周日凌晨 2 点清理 72 小时前的 Docker 资源
+```
+(crontab -l 2>/dev/null; echo "0 2 * * 0 docker system prune -af --filter \"until=72h\"") | crontab - 
 ```
