@@ -109,7 +109,7 @@ docker restart new-api
 
 2. 五天自动重启
 ```
-(crontab -l 2>/dev/null; echo "30 05 */5 * * /sbin/reboot") | crontab -
+(crontab -l 2>/dev/null; echo "30 5 5,10,15,25 * * /sbin/reboot") | crontab -
 ```
 
 3. 每周日凌晨 2 点清理 72 小时前的 Docker 资源
