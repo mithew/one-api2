@@ -59,7 +59,7 @@ docker run --name new-api -d --restart always \
 
 7. 设置证书自动续期：
 ```
-(crontab -l 2>/dev/null; echo "0 3 10,25 * * certbot renew --quiet") | crontab -
+(crontab -l 2>/dev/null; echo "0 3 * * * /usr/bin/certbot renew --pre-hook \"service nginx stop\" --post-hook \"service nginx start\" --quiet") | crontab -
 ```
 
 检查自动续期是否设置成功：
